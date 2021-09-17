@@ -56,5 +56,12 @@ namespace S21ClientApp
 
             dataGridView1.DataSource = stringSplit(userJson);
         }
+
+        private void btnServer_Click(object sender, EventArgs e)
+        {
+            HttpResponseMessage message = client.GetAsync("").Result;
+            string userJson = message.Content.ReadAsStringAsync().Result;
+            dataGridViewServer.DataSource = stringSplit(userJson);
+        }
     }
 }

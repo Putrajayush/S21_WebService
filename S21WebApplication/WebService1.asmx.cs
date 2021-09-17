@@ -37,22 +37,6 @@ namespace S21WebApplication
             return a+b;
         }
 
-        [WebMethod]
-        public string Countries()
-        {
-            dtCountries.Columns.Add("Country Name");
-            dtCountries.Columns.Add("Continent");
-
-            dtCountries.Rows.Add("Indonesia", "Asia");
-            dtCountries.Rows.Add("South Korea", "Asia");
-            dtCountries.Rows.Add("Japan", "Asia");
-            dtCountries.Rows.Add("England", "Europe");
-            dtCountries.Rows.Add("Nigeria", "Africa");
-            dtCountries.Rows.Add("Brazil", "South America");
-            dtCountries.Rows.Add("USA", "North America");
-
-            return JsonConvert.SerializeObject(dtCountries);
-        }
 
         [WebMethod]
         public string dataTableForUsers(string id)
@@ -64,64 +48,6 @@ namespace S21WebApplication
             return result;
         }
 
-        public void Main(string[] args)
-        {
-            Queue<Order> ordersQueue = new Queue<Order>();
-
-            foreach (Order o in ReceiveOrdersFromBranch1())
-            {
-                ordersQueue.Enqueue(o);
-            }
-
-            foreach (Order o in ReceiveOrdersFromBranch2())
-            {
-                ordersQueue.Enqueue(o);
-            }
-
-            while (ordersQueue.Count > 0)
-            {
-
-                Order currentOrder = ordersQueue.Dequeue();
-                currentOrder.ProcessOrder();
-            }
-        }
-
-        static Order[] ReceiveOrdersFromBranch1()
-        {
-            Order[] orders = new Order[]
-            {
-                new Order(1,5),
-                new Order(2,4),
-                new Order(6,10)
-            };
-            return orders;
-        }
-
-        static Order[] ReceiveOrdersFromBranch2()
-        {
-            Order[] orders = new Order[]
-            {
-                new Order(3,5),
-                new Order(4,4),
-                new Order(5,10)
-            };
-            return orders;
-        }
-
-        class Order
-        {
-            public int OrderId { get; set; }
-            public int OrderQuantity { get; set; }
-            public Order(int id, int orderQuantity)
-            {
-                this.OrderId = id;
-                this.OrderQuantity = orderQuantity;
-            }
-
-            public void ProcessOrder()
-            {
-                Console.WriteLine($"Order {OrderId} processed!.");
-            }
-        }
+        
     }
 }
